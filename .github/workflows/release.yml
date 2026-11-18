@@ -1,0 +1,44 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - master
+  # Allows you to trigger a build manually from the Actions tab.
+  workflow_dispatch:
+
+#softprops/action-gh-release needs write access to create/update releases.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build (SourceMod 1.12)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SourcePawn compiler (SourceMod 1.12)
+        id: setup_sp
+        uses: rumblefrog/setup-sp@master
+        with:
+          version: '1.12.x'
+          version-file: ./votescramble.sp
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compile plugin
+        run: |
+          mkdir -p build
+          spcomp -O2 -v2 -i include votescramble.sp -o build/votescramble.smx
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.setup_sp.outputs.plugin-version }}
+          name: Vote Scramble v${{ steps.setup_sp.outputs.plugin-version }}
+          files: |
+            build/votescramble.smx
+            votescramble.sp
+          generate_release_notes: true
