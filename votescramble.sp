@@ -176,7 +176,7 @@ public Action Cmd_VoteScramble(int client, int args)
 
 public void OnClientSayCommand_Post(int client, const char[] command, const char[] sArgs)
 {
-	if (strcmp(sArgs, "votescramble", false) == 0 || strcmp(sArgs, "vscramble", false) == 0 || strcmp(sArgs, "scramble", false) == 0 || strcmp(sArgs, "scrimblo", false) == 0 )
+	if (strcmp(sArgs, "votescramble", false) == 0 || strcmp(sArgs, "vscramble", false) == 0 || strcmp(sArgs, "scramble", false) == 0 || strcmp(sArgs, "scrimblo", false) == 0 || strcmp(sArgs, "scrabble", false) == 0 || strcmp(sArgs, "skibidi", false) == 0 || strcmp(sArgs, "mulligan", false) == 0 || strcmp(sArgs, "shuffle", false) == 0 || strcmp(sArgs, "giveup", false) == 0)
 	{
 		ReplySource old = SetCmdReplySource(SM_REPLY_TO_CHAT);
 

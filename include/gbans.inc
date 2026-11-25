@@ -28,12 +28,21 @@ SharedPlugin __pl_gbans = {name = "gbans", file = "gbans.smx",
 #endif
 };
 
+#if !defined REQUIRE_PLUGIN
+public void __pl_gbans_SetNTVOptional()
+{
+	MarkNativeAsOptional("GB_BanClient");
+	MarkNativeAsOptional("GB_BanClientAC");
+	MarkNativeAsOptional("GB_ScrambleTeams");
+}
+#endif
+
 enum GB_BanReason {
     unknown = 0,
     custom = 1,
     external = 2,
     cheating = 3,
-    racism = 4,
+    bigotry = 4,
     harassment = 5,
     exploiting = 6,
     warningsExceeded = 7,
